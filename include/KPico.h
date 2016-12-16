@@ -13,9 +13,13 @@ class KPico : public QObject, public IPlugin
 	Q_INTERFACES(IPlugin)
 public:
 	KPico();
+	QString name();
 
 	IEmulator* createEmulator();
 	void destroyEmulator(IEmulator* emulator);
+
+	IDisplay* createDisplay();
+	void destroyDisplay(IDisplay *display);
 };
 
 #endif // KPICO_H

@@ -1,18 +1,33 @@
 #include "KPico.h"
 #include <QDebug>
+#include <core/Logger.h>
 
 KPico::KPico()
 {
-	qDebug() << "KPico created!";
+
+}
+
+QString KPico::name()
+{
+	return "KPico";
 }
 
 IEmulator* KPico::createEmulator()
 {
-	qDebug() << "createEmulator";
 	return nullptr;
 }
 
 void KPico::destroyEmulator(IEmulator* emulator)
 {
-	qDebug() << "destroyEmulator";
+
+}
+
+IDisplay* KPico::createDisplay()
+{
+	return nullptr;
+}
+
+void KPico::destroyDisplay(IDisplay *display)
+{
+
 }
