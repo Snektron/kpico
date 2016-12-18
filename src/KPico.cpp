@@ -1,6 +1,5 @@
 #include "KPico.h"
 #include <QDebug>
-#include <core/Logger.h>
 
 KPico::KPico()
 {
@@ -9,7 +8,7 @@ KPico::KPico()
 
 QString KPico::name()
 {
-	return "KPico";
+	return "kpico";
 }
 
 IEmulator* KPico::createEmulator()
@@ -17,17 +16,7 @@ IEmulator* KPico::createEmulator()
 	return nullptr;
 }
 
-void KPico::destroyEmulator(IEmulator* emulator)
-{
-
-}
-
 IDisplay* KPico::createDisplay()
 {
 	return nullptr;
-}
-
-void KPico::destroyDisplay(IDisplay *display)
-{
-
 }

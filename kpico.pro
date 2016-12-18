@@ -3,8 +3,13 @@ TEMPLATE = lib
 INCLUDEPATH += include ../Pico80/include
 CONFIG += plugin
 QT += opengl
-DESTDIR = ../build-Pico80-Desktop_Qt_5_7_0_MinGW_32bit-Debug/plugins
-LIBS += -lscas -lz80e
+win32 {
+    DESTDIR = ../build-Pico80-Desktop_Qt_5_7_0_MinGW_32bit-Debug/plugins
+}
+unix {
+    DESTDIR = ../build-Pico80-Desktop-Debug/plugins
+}
+#LIBS += -lscas -lz80e
 
 SOURCES += \
     src/KPico.cpp
