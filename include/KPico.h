@@ -5,6 +5,7 @@
 #include <QtPlugin>
 #include <api/IPlugin.h>
 #include <api/IEmulator.h>
+#include <api/PluginEngine.h>
 
 class KPico : public QObject, public IPlugin
 {
@@ -14,6 +15,7 @@ class KPico : public QObject, public IPlugin
 public:
 	KPico();
 	QString name();
+	void registerPlugin(PluginEngine *engine);
 	IEmulator* createEmulator();
 	IDisplay* createDisplay();
 };

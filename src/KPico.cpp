@@ -11,6 +11,12 @@ QString KPico::name()
 	return "kpico";
 }
 
+void KPico::registerPlugin(PluginEngine *engine)
+{
+//	Q_UNUSED(engine)
+	engine->registerDisplayFactory(nullptr);
+}
+
 IEmulator* KPico::createEmulator()
 {
 	return nullptr;
