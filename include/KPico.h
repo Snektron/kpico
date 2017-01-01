@@ -7,7 +7,7 @@
 #include <picore/api/IEmulator.h>
 #include <picore/PluginEngine.h>
 
-class KPico : public QObject, public IPlugin
+class KPico: public QObject, public IPlugin
 {
 	Q_OBJECT
 	Q_PLUGIN_METADATA(IID IPlugin_iid FILE "kpico.json")
