@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>textures/test.png</file>
+        <file>TestDisplay.qml</file>
+    </qresource>
+</RCC>

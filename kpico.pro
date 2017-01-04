@@ -11,7 +11,8 @@ HEADERS += \
     include/KPico.h
 
 DISTFILES += \
-    kpico.json
+    kpico.json \
+    textures/test.png
 
 win32 {
     DESTDIR = ../build-Pico80-Desktop_Qt_5_7_0_MinGW_32bit-Debug/plugins
@@ -22,3 +23,6 @@ unix {
     DESTDIR = ../build-Pico80-Desktop-Debug/plugins
     LIBS += -L../build-Pico80-Desktop-Debug/ -lpicore
 }
+
+RESOURCES += \
+    rsrc.qrc

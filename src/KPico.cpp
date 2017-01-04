@@ -1,9 +1,7 @@
 #include "KPico.h"
-#include <QDebug>
 
 KPico::KPico()
 {
-	qInfo() << "KPico constructor";
 }
 
 QString KPico::name()
@@ -13,5 +11,5 @@ QString KPico::name()
 
 void KPico::registerPlugin(PluginEngine &engine)
 {
-	Q_UNUSED(engine)
+	engine.registerDisplayQml(QUrl("qrc:/TestDisplay.qml"));
 }
