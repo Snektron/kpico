@@ -3,12 +3,22 @@ TEMPLATE = lib
 INCLUDEPATH += include ../picore/include
 CONFIG += plugin c++11 silent
 QT += qml quick gui opengl
+LIBS += -lscas -lz80e
 
 SOURCES += \
-    src/KPico.cpp
+    src/KPico.cpp \
+    src/gui/Display.cpp \
+    src/gui/DisplayFrameBuffer.cpp \
+    src/gui/DisplayRenderer.cpp \
+    src/emu/Asic.cpp
 
 HEADERS += \
-    include/KPico.h
+    include/KPico.h \
+    include/gui/Display.h \
+    include/gui/DisplayFrameBuffer.h \
+    include/gui/DisplayRenderer.h \
+    include/emu/Asic.h \
+    include/emu/AsicFactory.h
 
 DISTFILES += \
     kpico.json \
@@ -21,7 +31,7 @@ win32 {
 
 unix {
     DESTDIR = ../build-Pico80-Desktop-Debug/plugins
-    LIBS += -L../build-Pico80-Desktop-Debug/ -lpicore
+	LIBS += -L../build-Pico80-Desktop-Debug/ -lpicore
 }
 
 RESOURCES += \

@@ -1,8 +1,10 @@
 #include "KPico.h"
+#include "gui/Display.h"
+
+#include "emu/AsicFactory.h"
 
 KPico::KPico()
-{
-}
+{}
 
 QString KPico::name()
 {
@@ -11,5 +13,8 @@ QString KPico::name()
 
 void KPico::registerPlugin(PluginEngine &engine)
 {
-	engine.registerDisplayQml(QUrl("qrc:/TestDisplay.qml"));
+	qmlRegisterType<Display>("KPico", 1, 0, "Display");
+
+	engine.registerDisplayQml(QUrl("qrc:/qml/Display.qml"));
+	engine.registerEmulatorFactory(new AsicFactory());
 }
