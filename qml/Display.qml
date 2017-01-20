@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
 import KPico 1.0
-import Picore 1.0
+import Pico80.Components 1.0
 
 View {
 	color: theme.display_placeholder.background

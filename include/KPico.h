@@ -3,9 +3,8 @@
 
 #include <QObject>
 #include <QtPlugin>
-#include <picore/api/IPlugin.h>
-#include <picore/api/IEmulator.h>
-#include <picore/PluginEngine.h>
+#include <Pico80/api/IPlugin.h>
+#include <Pico80/api/IEmulatorContext.h>
 
 class KPico: public QObject, public IPlugin
 {
@@ -15,7 +14,7 @@ class KPico: public QObject, public IPlugin
 public:
 	KPico();
 	QString name();
-	void registerPlugin(PluginEngine &engine);
+	IEmulatorContext* createContext(IPicoQmlEngine *engine);
 };
 
 #endif // KPICO_H
