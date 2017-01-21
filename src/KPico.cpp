@@ -12,7 +12,7 @@ QString KPico::name()
 	return "kpico";
 }
 
-IEmulatorContext* KPico::createContext(IPicoQmlEngine *engine)
+IEmulatorContext* KPico::createContext(IPicoEngine *engine)
 {
 	qmlRegisterType<Display>("KPico", 1, 0, "Display");
 	return new EmulatorContext(engine);

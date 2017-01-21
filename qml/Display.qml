@@ -1,10 +1,35 @@
 import QtQuick 2.0
+import QtQuick.Dialogs 1.0
 import QtGraphicalEffects 1.0
 import KPico 1.0
 import Pico80.Components 1.0
 
 View {
-	color: theme.display_placeholder.background
+	color: Theme.display_placeholder.background
+
+	toolbar: Row {
+		spacing: 2
+		anchors.leftMargin: 4
+		anchors.fill: parent
+
+		PicoToolButton {
+			text: "\uF0F6"
+			anchors.verticalCenter: parent.verticalCenter
+
+			tooltip: PicoToolTip {
+				text: "Open rom file"
+			}
+		}
+
+		PicoToolCheckBox {
+			text: "\uF011"
+			anchors.verticalCenter: parent.verticalCenter
+
+			tooltip: PicoToolTip {
+				text: "Start/stop emulator"
+			}
+		}
+	}
 
 	Item {
 		anchors.margins: 10
@@ -35,10 +60,3 @@ View {
 		}
 	}
 }
-
-/*
-Image {
-	fillMode: Image.PreserveAspectFit
-	source: "qrc:/textures/test.png"
-}
-*/

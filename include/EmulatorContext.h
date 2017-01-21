@@ -2,7 +2,7 @@
 #define EMULATORCONTEXT_H
 
 #include <Pico80/api/IEmulatorContext.h>
-#include <Pico80/api/IPicoQmlEngine.h>
+#include <Pico80/api/IPicoEngine.h>
 
 class EmulatorContext: public IEmulatorContext
 {
@@ -10,7 +10,7 @@ private:
 	QQuickItem *display;
 
 public:
-	EmulatorContext(IPicoQmlEngine *engine);
+	EmulatorContext(IPicoEngine *engine);
 	~EmulatorContext();
 };
 

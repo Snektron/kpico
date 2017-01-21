@@ -2,9 +2,9 @@
 #include <QQmlComponent>
 #include <QDebug>
 
-EmulatorContext::EmulatorContext(IPicoQmlEngine *engine)
+EmulatorContext::EmulatorContext(IPicoEngine *engine)
 {
-	display = engine->setDisplay(QUrl("qrc:/qml/Display.qml"));
+	display = engine->qmlEngine()->setDisplay(QUrl("qrc:/qml/Display.qml"));
 }
 
 EmulatorContext::~EmulatorContext()

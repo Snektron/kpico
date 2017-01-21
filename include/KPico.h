@@ -5,6 +5,7 @@
 #include <QtPlugin>
 #include <Pico80/api/IPlugin.h>
 #include <Pico80/api/IEmulatorContext.h>
+#include <Pico80/api/IPicoEngine.h>
 
 class KPico: public QObject, public IPlugin
 {
@@ -14,7 +15,7 @@ class KPico: public QObject, public IPlugin
 public:
 	KPico();
 	QString name();
-	IEmulatorContext* createContext(IPicoQmlEngine *engine);
+	IEmulatorContext* createContext(IPicoEngine *engine);
 };
 
 #endif // KPICO_H
