@@ -3,28 +3,41 @@ TEMPLATE = lib
 INCLUDEPATH += include ../Pico80/include
 CONFIG += plugin c++11 silent
 QT += qml quick gui opengl
-LIBS += -lscas -lz80e
 
 SOURCES += \
 	src/KPico.cpp \
     src/EmulatorContext.cpp \
     src/gui/Display.cpp \
     src/gui/DisplayFrameBuffer.cpp \
-    src/gui/DisplayRenderer.cpp
+    src/gui/DisplayRenderer.cpp \
+    src/emu/Emulator.cpp \
+    src/emu/EmulatorThread.cpp
 
 HEADERS += \
 	include/KPico.h \
     include/EmulatorContext.h \
     include/gui/Display.h \
     include/gui/DisplayFrameBuffer.h \
-    include/gui/DisplayRenderer.h
+    include/gui/DisplayRenderer.h \
+    include/emu/Emulator.h \
+    include/emu/EmulatorThread.h
 
 DISTFILES += \
     kpico.json \
     textures/test.png
 
-win32: DESTDIR = ../build-Pico80-Desktop_Qt_5_7_0_MinGW_32bit-Debug/plugins
-unix: DESTDIR = ../build-Pico80-Desktop-Debug/plugins
-
 RESOURCES += \
-    rsrc.qrc
+	rsrc.qrc
+
+win32: {
+	DESTDIR = ../build-Pico80-Desktop_Qt_5_7_0_MinGW_32bit-Debug/plugins
+	INCLUDEPATH += 3rdparty/scas/include
+	INCLUDEPATH += 3rdparty/z80e/include
+	DEFINES += NOLINK
+	LIBS += -L"$$PWD/3rdparty/scas/bin" -lscas
+	LIBS += -L"$$PWD/3rdparty/z80e/bin" -lz80e
+}
+unix: {
+	DESTDIR = ../build-Pico80-Desktop-Debug/plugins
+	LIBS += -lscas -lz80e
+}

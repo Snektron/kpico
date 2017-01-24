@@ -21,12 +21,12 @@ View {
 			}
 		}
 
-		PicoToolCheckBox {
+		PicoToolButton {
 			text: "\uF011"
 			anchors.verticalCenter: parent.verticalCenter
 
 			tooltip: PicoToolTip {
-				text: "Start/stop emulator"
+				text: "Start emulator"
 			}
 		}
 	}

@@ -4,10 +4,19 @@
 
 EmulatorContext::EmulatorContext(IPicoEngine *engine)
 {
-	display = engine->qmlEngine()->setDisplay(QUrl("qrc:/qml/Display.qml"));
+	display = engine->qmlEngine()->loadComponent(QUrl("qrc:/qml/Display.qml"));
+	emulator = new EmulatorThread();
+	emulator->start();
+
+	engine->rootContext()->setContextProperty("Emulator", emulator);
+	engine->qmlEngine()->setDisplay(display);
 }
 
 EmulatorContext::~EmulatorContext()
 {
+	emulator->quit();
+	emulator->wait();
+
 	delete display;
+	delete emulator;
 }
