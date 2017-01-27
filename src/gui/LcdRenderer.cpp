@@ -1,4 +1,5 @@
-#include "gui/DisplayRenderer.h"
+#include "gui/LcdRenderer.h"
+#include <QDebug>
 
 const float vertices[] =
 {
@@ -16,7 +17,7 @@ const float texcoords[] =
 	1, 1
 };
 
-DisplayRenderer::DisplayRenderer()
+LcdRenderer::LcdRenderer()
 {
 	initializeOpenGLFunctions();
 	shader = new QOpenGLShaderProgram();
@@ -35,7 +36,7 @@ DisplayRenderer::DisplayRenderer()
 	shader->release();
 }
 
-void DisplayRenderer::render()
+void LcdRenderer::render()
 {
 	shader->bind();
 
@@ -62,8 +63,13 @@ void DisplayRenderer::render()
 	shader->release();
 }
 
-DisplayRenderer::~DisplayRenderer()
+LcdRenderer::~LcdRenderer()
 {
 	delete shader;
 	delete texture;
+}
+
+void LcdRenderer::onLcdChanged()
+{
+	qDebug() << "Lcd Changed";
 }

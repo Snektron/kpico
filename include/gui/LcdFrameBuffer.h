@@ -4,20 +4,20 @@
 #include <QOpenGLFramebufferObject>
 #include <QQuickFramebufferObject>
 #include <QQuickItem>
-#include "gui/DisplayRenderer.h"
+#include "gui/LcdRenderer.h"
 
-class DisplayFrameBuffer: public QQuickFramebufferObject::Renderer
+class LcdFrameBuffer: public QQuickFramebufferObject::Renderer
 {
 private:
 	QQuickFramebufferObject *parent;
-	DisplayRenderer *renderer;
+	LcdRenderer *renderer;
 
 public:
-	DisplayFrameBuffer();
+	LcdFrameBuffer();
 	QOpenGLFramebufferObject* createFramebufferObject(const QSize &size);
 	void synchronize(QQuickFramebufferObject *item);
 	void render();
-	~DisplayFrameBuffer();
+	~LcdFrameBuffer();
 };
 
 #endif // DISPLAYFRAMEBUFFER_H

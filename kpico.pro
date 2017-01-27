@@ -7,20 +7,27 @@ QT += qml quick gui opengl
 SOURCES += \
 	src/KPico.cpp \
     src/EmulatorContext.cpp \
-    src/gui/Display.cpp \
-    src/gui/DisplayFrameBuffer.cpp \
-    src/gui/DisplayRenderer.cpp \
     src/emu/Emulator.cpp \
-    src/emu/EmulatorThread.cpp
+    src/emu/EmulatorThread.cpp \
+    src/emu/Asic.cpp \
+    src/emu/Log.cpp \
+    src/emu/Debugger.cpp \
+    src/gui/Lcd.cpp \
+    src/gui/LcdRenderer.cpp \
+    src/gui/LcdFrameBuffer.cpp
 
 HEADERS += \
 	include/KPico.h \
     include/EmulatorContext.h \
-    include/gui/Display.h \
-    include/gui/DisplayFrameBuffer.h \
-    include/gui/DisplayRenderer.h \
     include/emu/Emulator.h \
-    include/emu/EmulatorThread.h
+    include/emu/EmulatorThread.h \
+    include/emu/Asic.h \
+    include/emu/Log.h \
+    include/emu/Debugger.h \
+    include/emu/EmulatorQml.h \
+    include/gui/LcdFrameBuffer.h \
+    include/gui/Lcd.h \
+    include/gui/LcdRenderer.h
 
 DISTFILES += \
     kpico.json \

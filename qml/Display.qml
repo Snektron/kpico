@@ -13,22 +13,48 @@ View {
 		anchors.fill: parent
 
 		PicoToolButton {
+			id: rompickerbutton
 			text: "\uF0F6"
 			anchors.verticalCenter: parent.verticalCenter
+			onClicked: rompicker.open()
+
+			property url rom: Settings.value("KPico/ROM", "");
+
+			Component.onCompleted: loadRom(rom)
 
 			tooltip: PicoToolTip {
-				text: "Open rom file"
+				text: "Select ROM image\nCurrent ROM: " + rompickerbutton.getRomName(rompickerbutton.rom)
+			}
+
+			FileDialog {
+				id: rompicker
+				onAccepted: rompickerbutton.loadRom(fileUrl)
+			}
+
+			function getRomName(url) {
+				if (url === "")
+					return "None"
+				else
+					return url.toString().replace(/^(file:\/{3})/,"")
+			}
+
+			function loadRom(url) {
+				rompickerbutton.rom = url
+				Settings.setValue("KPico/ROM", url);
+				Asic.loadRom(url);
 			}
 		}
 
 		PicoToolButton {
 			text: "\uF011"
 			anchors.verticalCenter: parent.verticalCenter
+		//	onClicked: Emulator.emuStart()
 
 			tooltip: PicoToolTip {
 				text: "Start emulator"
 			}
 		}
+
 	}
 
 	Item {
@@ -53,8 +79,9 @@ View {
 				height = min / 1.5
 			}
 
-			Display {
-				id: display
+			Lcd {
+				id: lcd
+				objectName: "LCD"
 				anchors.fill: parent
 			}
 		}

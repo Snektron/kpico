@@ -6,7 +6,7 @@
 #include <QOpenGLTexture>
 #include <QObject>
 
-class DisplayRenderer: public QObject, public QOpenGLFunctions
+class LcdRenderer: public QObject, public QOpenGLFunctions
 {
 	Q_OBJECT
 private:
@@ -14,9 +14,12 @@ private:
 	QOpenGLTexture *texture;
 
 public:
-	DisplayRenderer();
+	LcdRenderer();
 	void render();
-	~DisplayRenderer();
+	~LcdRenderer();
+
+public slots:
+	void onLcdChanged();
 };
 
 #endif // DISPLAYRENDERER_H

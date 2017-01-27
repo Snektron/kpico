@@ -3,12 +3,15 @@
 
 #include <QQuickFramebufferObject>
 
-class Display: public QQuickFramebufferObject
+class Lcd: public QQuickFramebufferObject
 {
 	Q_OBJECT
 public:
-	Display();
+	Lcd();
 	QQuickFramebufferObject::Renderer* createRenderer() const;
+
+signals:
+	void lcdChanged();
 };
 
 #endif // DISPLAY_H

@@ -1,61 +1,26 @@
 #include "emu/Emulator.h"
 #include <QFile>
-extern "C" {
-#include <scas/stack.h>
-}
+#include <QThread>
 
-void logCbk(void *data, loglevel_t level, const char *part, const char *message, va_list args)
+Emulator::Emulator(log_t *log):
+	log(log),
+	mAsic(new Asic(log)),
+	mDebugger(new Debugger(log, mAsic))
 {
-	// do nothing for now...
-	Q_UNUSED(data)
-	Q_UNUSED(level)
-	Q_UNUSED(part)
-	Q_UNUSED(message)
-	Q_UNUSED(args)
-}
-
-void lcdUpdateCbk(void *data, ti_bw_lcd_t *lcd)
-{
-	Emulator *emu = (Emulator*) data;
-	Q_UNUSED(emu)
-	Q_UNUSED(lcd)
-}
-
-Emulator::Emulator()
-{
-	log = init_log_z80e(logCbk, 0, L_INFO);
-	asic = asic_init(TI84pSE, log);
-	hook_add_lcd_update(asic->hook, this, lcdUpdateCbk);
-	asic->stopped = 1;
+	log_message(log, L_DEBUG, "emulator", "Initializing emulator");
 }
 
 Emulator::~Emulator()
 {
-	asic_free(asic);
-	free_log(log);
+	delete mAsic;
 }
 
-void Emulator::loadRom(QString rom)
+Asic* Emulator::asic()
 {
-	QFile file(rom);
-	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-		return;
-	file.read((char*) asic->mmu->flash, 0x4000 * asic->mmu->settings.flash_pages);
-	file.close();
+	return mAsic;
 }
 
-void Emulator::start()
+Debugger* Emulator::debugger()
 {
-	asic->stopped = 0;
-}
-
-void Emulator::tick()
-{
-	if (!asic->stopped)
-		runloop_tick(asic->runloop);
-}
-
-void Emulator::stop()
-{
-	asic->stopped = 1;
+	return mDebugger;
 }

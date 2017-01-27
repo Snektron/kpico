@@ -1,5 +1,5 @@
 #include "KPico.h"
-#include "gui/Display.h"
+#include "gui/Lcd.h"
 #include "EmulatorContext.h"
 
 KPico::KPico()
@@ -14,6 +14,6 @@ QString KPico::name()
 
 IEmulatorContext* KPico::createContext(IPicoEngine *engine)
 {
-	qmlRegisterType<Display>("KPico", 1, 0, "Display");
+	qmlRegisterType<Lcd>("KPico", 1, 0, "Lcd");
 	return new EmulatorContext(engine);
 }

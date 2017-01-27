@@ -3,17 +3,27 @@
 
 #include <QThread>
 #include <QString>
+#include <QUrl>
+#include "emu/EmulatorQml.h"
+
+extern "C"
+{
+#include <z80e/log/log.h>
+}
 
 class EmulatorThread: public QThread
 {
 	Q_OBJECT
+private:
+	AsicQml *asicQml;
+	DebuggerQml *dbgQml;
+
 public:
+	EmulatorThread(AsicQml *asicSig, DebuggerQml *dbgSig);
 	void run();
 
-signals:
-	void emuLoadRom(QString rom);
-	void emuStart();
-	void emuStop();
+private slots:
+	void logMessage(loglevel_t level, QString message);
 };
 
 #endif // EMULATORTHREAD_H

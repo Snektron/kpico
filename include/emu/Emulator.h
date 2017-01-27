@@ -3,30 +3,28 @@
 
 #include <QObject>
 #include <QString>
-
-extern "C"
-{
-#include <z80e/ti/asic.h>
-#include <z80e/ti/hardware/t6a04.h>
-#include <z80e/log/log.h>
-}
+#include <QUrl>
+#include "emu/Log.h"
+#include "emu/Asic.h"
+#include "emu/Debugger.h"
 
 class Emulator: public QObject
 {
 	Q_OBJECT
 private:
 	log_t *log;
-	asic_t *asic;
+	Asic *mAsic;
+	Debugger *mDebugger;
 
 public:
-	Emulator();
+	Emulator(log_t *log);
 	~Emulator();
 
-public slots:
-	void loadRom(QString rom);
-	void start();
-	void tick();
-	void stop();
+	Asic* asic();
+	Debugger* debugger();
+
+signals:
+	void logMessage(loglevel_t level, QString message);
 };
 
 #endif // EMULATOR_H
