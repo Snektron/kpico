@@ -1,0 +1,6 @@
+kpico {
+	display {
+		background = #E0E0E0
+		shadow = #212121A0
+	}
+}

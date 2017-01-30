@@ -11,10 +11,14 @@ SOURCES += \
     src/emu/EmulatorThread.cpp \
     src/emu/Asic.cpp \
     src/emu/Log.cpp \
-    src/emu/Debugger.cpp \
     src/gui/Lcd.cpp \
     src/gui/LcdRenderer.cpp \
-    src/gui/LcdFrameBuffer.cpp
+    src/gui/LcdFrameBuffer.cpp \
+    src/emu/debug/CommandHandler.cpp \
+    src/emu/debug/InstructionModel.cpp \
+    src/KPicoQml.cpp \
+	src/emu/debug/DebuggerQml.cpp \
+    src/emu/debug/Debugger.cpp
 
 HEADERS += \
 	include/KPico.h \
@@ -22,12 +26,15 @@ HEADERS += \
     include/emu/Emulator.h \
     include/emu/EmulatorThread.h \
     include/emu/Asic.h \
-    include/emu/Log.h \
-    include/emu/Debugger.h \
-    include/emu/EmulatorQml.h \
+	include/emu/Log.h \
     include/gui/LcdFrameBuffer.h \
     include/gui/Lcd.h \
-    include/gui/LcdRenderer.h
+    include/gui/LcdRenderer.h \
+    include/emu/debug/CommandHandler.h \
+    include/emu/debug/InstructionModel.h \
+    include/KPicoQml.h \
+	include/emu/debug/DebuggerQml.h \
+    include/emu/debug/Debugger.h
 
 DISTFILES += \
     kpico.json \

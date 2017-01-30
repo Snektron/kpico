@@ -4,7 +4,7 @@
 #include <QThread>
 #include <QString>
 #include <QUrl>
-#include "emu/EmulatorQml.h"
+#include "KPicoQml.h"
 
 extern "C"
 {
@@ -15,11 +15,10 @@ class EmulatorThread: public QThread
 {
 	Q_OBJECT
 private:
-	AsicQml *asicQml;
-	DebuggerQml *dbgQml;
+	KPicoQml *kpico;
 
 public:
-	EmulatorThread(AsicQml *asicSig, DebuggerQml *dbgSig);
+	EmulatorThread(KPicoQml *kpico);
 	void run();
 
 private slots:

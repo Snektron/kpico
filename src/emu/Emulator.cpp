@@ -4,23 +4,24 @@
 
 Emulator::Emulator(log_t *log):
 	log(log),
-	mAsic(new Asic(log)),
-	mDebugger(new Debugger(log, mAsic))
+	mAsic(log),
+	mCmdHandler(&mAsic),
+	mDebugger(&mAsic)
 {
 	log_message(log, L_DEBUG, "emulator", "Initializing emulator");
 }
 
-Emulator::~Emulator()
-{
-	delete mAsic;
-}
-
 Asic* Emulator::asic()
 {
-	return mAsic;
+	return &mAsic;
+}
+
+CommandHandler* Emulator::cmdHandler()
+{
+	return &mCmdHandler;
 }
 
 Debugger* Emulator::debugger()
 {
-	return mDebugger;
+	return &mDebugger;
 }

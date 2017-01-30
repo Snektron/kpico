@@ -5,7 +5,7 @@ import KPico 1.0
 import Pico80.Components 1.0
 
 View {
-	color: Theme.display_placeholder.background
+	color: Theme.kpico.display.background
 
 	toolbar: Row {
 		spacing: 2
@@ -41,20 +41,18 @@ View {
 			function loadRom(url) {
 				rompickerbutton.rom = url
 				Settings.setValue("KPico/ROM", url);
-				Asic.loadRom(url);
+				KPico.asic.loadRom(url);
 			}
 		}
 
 		PicoToolButton {
 			text: "\uF011"
 			anchors.verticalCenter: parent.verticalCenter
-		//	onClicked: Emulator.emuStart()
 
 			tooltip: PicoToolTip {
 				text: "Start emulator"
 			}
 		}
-
 	}
 
 	Item {
@@ -70,7 +68,7 @@ View {
 
 			glowRadius: 5
 			spread: 0.2
-			color: "#A0212121"
+			color: Theme.kpico.display.shadow
 			cornerRadius: 15
 
 			function updateAspect(parentWidth, parentHeight) {

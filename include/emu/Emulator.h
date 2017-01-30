@@ -4,27 +4,27 @@
 #include <QObject>
 #include <QString>
 #include <QUrl>
+#include <QVariantMap>
 #include "emu/Log.h"
 #include "emu/Asic.h"
-#include "emu/Debugger.h"
+#include "emu/debug/CommandHandler.h"
+#include "emu/debug/Debugger.h"
 
 class Emulator: public QObject
 {
 	Q_OBJECT
 private:
 	log_t *log;
-	Asic *mAsic;
-	Debugger *mDebugger;
+	Asic mAsic;
+	CommandHandler mCmdHandler;
+	Debugger mDebugger;
 
 public:
 	Emulator(log_t *log);
-	~Emulator();
 
 	Asic* asic();
+	CommandHandler* cmdHandler();
 	Debugger* debugger();
-
-signals:
-	void logMessage(loglevel_t level, QString message);
 };
 
 #endif // EMULATOR_H

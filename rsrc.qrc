@@ -4,5 +4,7 @@
         <file>qml/Display.qml</file>
         <file>shaders/Display.fsh</file>
         <file>shaders/Display.vsh</file>
+        <file>qml/DebugView.qml</file>
+        <file>theme/kpico.thm</file>
     </qresource>
 </RCC>

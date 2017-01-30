@@ -4,16 +4,15 @@
 #include <Pico80/api/IEmulatorContext.h>
 #include <Pico80/api/IPicoEngine.h>
 #include "emu/EmulatorThread.h"
-#include "emu/EmulatorQml.h"
+#include "KPicoQml.h"
 
 class EmulatorContext: public IEmulatorContext
 {
 private:
-	AsicQml asicQml;
-	DebuggerQml dbgQml;
-
+	KPicoQml kpico;
 	EmulatorThread *emulator;
-	QQuickItem *lcd;
+	QQuickItem *display;
+	QQuickItem *debugView;
 
 public:
 	EmulatorContext(IPicoEngine *engine);

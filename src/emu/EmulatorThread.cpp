@@ -4,9 +4,8 @@
 #include "emu/Emulator.h"
 #include "emu/Log.h"
 
-EmulatorThread::EmulatorThread(AsicQml *asicQml, DebuggerQml *dbgQml):
-	asicQml(asicQml),
-	dbgQml(dbgQml)
+EmulatorThread::EmulatorThread(KPicoQml *kpico):
+	kpico(kpico)
 {}
 
 void EmulatorThread::run()
@@ -20,22 +19,28 @@ void EmulatorThread::run()
 	Emulator emu(log.log());
 
 	connect(emu.asic(), SIGNAL(lcdChanged()),
-			asicQml, SIGNAL(onLcdChanged()),
+			kpico->asicQml(), SIGNAL(onLcdChanged()),
 			Qt::QueuedConnection);
 
-	connect(asicQml, SIGNAL(loadRom(QUrl)),
+	connect(kpico->asicQml(), SIGNAL(loadRom(QUrl)),
 			emu.asic(), SLOT(loadRom(QUrl)),
 			Qt::QueuedConnection);
 
-	connect(dbgQml, SIGNAL(command(QString)),
-			emu.debugger(), SLOT(onCommand(QString)),
+	connect(kpico->cmdQml(), SIGNAL(command(QString)),
+			emu.cmdHandler(), SLOT(onCommand(QString)),
 			Qt::QueuedConnection);
 
-//	connect(&timer, SIGNAL(timeout()), &emu, SLOT(tick()));
-//	connect(this, SIGNAL(emuLoadRom(QUrl)), &emu, SLOT(loadRom(QUrl)), Qt::QueuedConnection);
-//	connect(this, SIGNAL(emuStart()), &emu, SLOT(start()), Qt::QueuedConnection);
-//	connect(this, SIGNAL(emuStop()), &emu, SLOT(stop()), Qt::QueuedConnection);
-//	connect(&emu, SIGNAL(lcdChanged()), this, SIGNAL(lcdChanged()), Qt::QueuedConnection);
+	connect(kpico->debugger(), SIGNAL(refresh()),
+			emu.debugger(), SLOT(refresh()),
+			Qt::QueuedConnection);
+
+	connect(kpico->debugger(), SIGNAL(step()),
+			emu.debugger(), SLOT(step()),
+			Qt::QueuedConnection);
+
+	connect(emu.debugger(), SIGNAL(onRefreshComplete(DebuggerData)),
+			kpico->debugger(), SLOT(onRefreshComplete(DebuggerData)),
+			Qt::QueuedConnection);
 
 	timer.setTimerType(Qt::PreciseTimer);
 	timer.start(1);
