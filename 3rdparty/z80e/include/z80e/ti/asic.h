@@ -48,13 +48,13 @@ struct z80_hardware_timers {
 	z80_hardware_timer_t *timers;
 };
 
-#ifndef NOLINK
 struct z80_link_socket {
+#ifndef NOLINK
 	int accept;
 	struct pollfd listenfd;
 	struct pollfd clients[10];
-};
 #endif
+};
 
 struct asic {
 	int stopped;
@@ -68,9 +68,7 @@ struct asic {
 	ti_mmu_t* mmu;
 	ti_interrupts_t *interrupts;
 	z80_hardware_timers_t *timers;
-#ifndef NOLINK
 	z80_link_socket_t *link;
-#endif
 	hook_info_t *hook;
 	log_t *log;
 	debugger_t *debugger;
