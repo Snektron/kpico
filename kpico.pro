@@ -34,7 +34,8 @@ HEADERS += \
     include/emu/debug/InstructionModel.h \
     include/KPicoQml.h \
     include/emu/debug/DebuggerQml.h \
-    include/emu/debug/Debugger.h
+    include/emu/debug/Debugger.h \
+    include/emu/debug/Instruction.h
 
 DISTFILES += \
     kpico.json \

@@ -2,26 +2,14 @@
 #define INSTRUCTIONMODEL_H
 
 #include <QAbstractListModel>
-#include <QList>
 #include <QString>
-
-typedef struct
-{
-	QString decoded;
-	QString hex;
-	int size;
-	uint16_t address;
-} InstructionData;
-
-typedef QList<InstructionData> InstructionList;
+#include "emu/debug/Instruction.h"
 
 class InstructionModel : public QAbstractListModel
 {
 	Q_OBJECT
-	Q_PROPERTY(int current READ current() CONSTANT)
 private:
 	InstructionList instructions;
-	int mCurrent;
 
 public:
 	enum InstructionModelRoles
@@ -35,11 +23,10 @@ public:
 	int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 	QHash<int, QByteArray> roleNames() const;
-	int current();
 
+	Q_INVOKABLE int indexAtAddress(int address);
 public slots:
-	void clear();
-	void setInstructions(InstructionList list, int current);
+	void setInstructions(InstructionList list);
 };
 
 

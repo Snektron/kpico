@@ -42,17 +42,13 @@ void Debugger::disassemble(DebuggerData *data)
 	{
 		last = mem.current;
 
-		InstructionData instr;
+		Instruction instr;
 		instr.address = mem.current;
 		instr.size = parse_instruction(&mem, disasmWrite, false);
 		instr.hex = readHex(last, instr.size);
 		instr.decoded = extra.line;
 
-		data->instructions.append(instr);
-
-		int pc = mAsic->asic()->cpu->registers.PC - last;
-		if (pc >= 0 && pc < instr.size)
-			data->instructionIndex = data->instructions.length() - 1;
+		data->instructions.addInstruction(instr);
 
 		extra.line = "";
 	} while (last < mem.current); // detect overflow
@@ -137,7 +133,8 @@ uint8_t Debugger::memWrite(void *data, uint16_t address, uint8_t value)
 void Debugger::refresh()
 {
 	DebuggerData data;
-	disassemble(&data);
+	if (mMemDirty)
+		disassemble(&data);
 	data.registers = mAsic->asic()->cpu->registers;
 	emit onRefreshComplete(data);
 }

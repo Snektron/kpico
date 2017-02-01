@@ -46,7 +46,8 @@ void DebuggerQml::setRegisters(z80registers_t *registers)
 
 void DebuggerQml::onRefreshComplete(DebuggerData data)
 {
-	mInstructions.setInstructions(data.instructions, data.instructionIndex);
+	if (data.instructions.size() > 0)
+		mInstructions.setInstructions(data.instructions);
 	setRegisters(&data.registers);
 	emit refreshed();
 }

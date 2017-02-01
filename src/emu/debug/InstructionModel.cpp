@@ -5,25 +5,25 @@
 int InstructionModel::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent)
-	return instructions.length();
+	return instructions.size();
 }
 
 QVariant InstructionModel::data(const QModelIndex &index, int role) const
 {
-	if (index.row() < 0 || index.row() >= instructions.length())
+	if (index.row() < 0 || index.row() >= instructions.size())
 		return QVariant();
 
-	InstructionData data = instructions[index.row()];
+	const Instruction *data = instructions.atIndex(index.row());
 	switch(role)
 	{
 	case AddressRole:
-		return data.address;
+		return data->address;
 	case HexRole:
-		return data.hex;
+		return data->hex;
 	case DecodedRole:
-		return data.decoded;
+		return data->decoded;
 	case SizeRole:
-		return data.size;
+		return data->size;
 	}
 
 	return QVariant();
@@ -39,26 +39,18 @@ QHash<int, QByteArray> InstructionModel::roleNames() const
 	return roles;
 }
 
-int InstructionModel::current()
+int InstructionModel::indexAtAddress(int address)
 {
-	return mCurrent;
+	return instructions.indexAtAddress(address & 0xFFFF);
 }
 
-void InstructionModel::clear()
+void InstructionModel::setInstructions(InstructionList list)
 {
-	beginRemoveRows(QModelIndex(), 0, instructions.size());
-	instructions.clear();
-	endRemoveRows();
-}
-
-void InstructionModel::setInstructions(InstructionList list, int current)
-{
-	mCurrent = current;
 
 	if (instructions.size() > 0)
 	{
 		beginRemoveRows(QModelIndex(), 0, instructions.size() - 1);
-		instructions.clear();
+		instructions.instructions().clear();
 		endRemoveRows();
 	}
 

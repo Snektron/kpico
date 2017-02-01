@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "emu/Asic.h"
-#include "emu/debug/InstructionModel.h"
+#include "emu/debug/Instruction.h"
 
 extern "C"
 {
@@ -16,7 +16,6 @@ extern "C"
 typedef struct
 {
 	InstructionList instructions;
-	int instructionIndex;
 	z80registers_t registers;
 } DebuggerData;
 

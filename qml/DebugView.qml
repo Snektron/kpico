@@ -47,23 +47,28 @@ View {
 	}
 
 	ListView {
-		id: instructions
+		id: instructionview
 		boundsBehavior: Flickable.StopAtBounds
 		flickableDirection: Flickable.VerticalFlick
 		anchors.fill: parent
 		model: KPico.debugger.instructions
 
+		property int pcindex: 0
+
 		Connections {
 			target: KPico.debugger
-			onRefreshed: instructions.positionViewAtIndex(
-							 KPico.debugger.instructions.current, ListView.Center)
+			onRefreshed: {
+				var pcindex = KPico.debugger.instructions.indexAtAddress(KPico.debugger.registers.pc);
+				instructionview.positionViewAtIndex(pcindex, ListView.Center)
+				instructionview.pcindex = pcindex
+			}
 		}
 
 		delegate: Rectangle {
 			width: parent ? parent.width : 0
 			height: childrenRect.height
 			color: {
-				if (KPico.debugger.instructions.current === index)
+				if (instructionview.pcindex == index)
 					return "#FF8A80"
 				return index % 2 == 0 ? "#FFFFFF" : "#F5F5F5"
 			}
