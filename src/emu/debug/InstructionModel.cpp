@@ -5,15 +5,15 @@
 int InstructionModel::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent)
-	return instructions.size();
+	return disassembly.size();
 }
 
 QVariant InstructionModel::data(const QModelIndex &index, int role) const
 {
-	if (index.row() < 0 || index.row() >= instructions.size())
+	if (index.row() < 0 || index.row() >= disassembly.size())
 		return QVariant();
 
-	const Instruction *data = instructions.atIndex(index.row());
+	const Instruction *data = disassembly.atIndex(index.row());
 	switch(role)
 	{
 	case AddressRole:
@@ -41,23 +41,23 @@ QHash<int, QByteArray> InstructionModel::roleNames() const
 
 int InstructionModel::indexAtAddress(int address)
 {
-	return instructions.indexAtAddress(address & 0xFFFF);
+	return disassembly.indexAtAddress(address & 0xFFFF);
 }
 
 void InstructionModel::setInstructions(InstructionList list)
 {
 
-	if (instructions.size() > 0)
+	if (disassembly.size() > 0)
 	{
-		beginRemoveRows(QModelIndex(), 0, instructions.size() - 1);
-		instructions.instructions().clear();
+		beginRemoveRows(QModelIndex(), 0, disassembly.size() - 1);
+		disassembly.instructions().clear();
 		endRemoveRows();
 	}
 
 	if (list.size() > 0)
 	{
 		beginInsertRows(QModelIndex(), 0, list.size() - 1);
-		instructions = list;
+		disassembly = list;
 		endInsertRows();
 	}
 }

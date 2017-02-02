@@ -9,7 +9,7 @@ class InstructionModel : public QAbstractListModel
 {
 	Q_OBJECT
 private:
-	InstructionList instructions;
+	InstructionList disassembly;
 
 public:
 	enum InstructionModelRoles

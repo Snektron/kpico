@@ -18,7 +18,8 @@ SOURCES += \
     src/emu/debug/InstructionModel.cpp \
     src/KPicoQml.cpp \
     src/emu/debug/DebuggerQml.cpp \
-    src/emu/debug/Debugger.cpp
+    src/emu/debug/Debugger.cpp \
+    src/emu/debug/Disassembler.cpp
 
 HEADERS += \
     include/KPico.h \
@@ -35,7 +36,8 @@ HEADERS += \
     include/KPicoQml.h \
     include/emu/debug/DebuggerQml.h \
     include/emu/debug/Debugger.h \
-    include/emu/debug/Instruction.h
+    include/emu/debug/Instruction.h \
+    include/emu/debug/Disassembler.h
 
 DISTFILES += \
     kpico.json \

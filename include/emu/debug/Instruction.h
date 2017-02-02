@@ -22,15 +22,22 @@ private:
 
 public:
 	inline int size() const { return mInstructions.size(); }
+
 	inline int indexAtAddress(uint16_t address) const { return mIndices[address]; }
+
 	inline const Instruction* atAddress(uint16_t address) const { return atIndex(mIndices[address]); }
+
 	inline const Instruction* atIndex(int index) const { return &mInstructions[index]; }
+
 	inline QList<Instruction> instructions() { return mInstructions; }
+
 	inline void setIndex (uint16_t address, int index) { mIndices[address] = index; }
-	inline void addInstruction(Instruction &i)
+
+	void addInstruction(Instruction &i)
 	{
 		i.index = mInstructions.size();
-		setIndex(i.address, i.index);
+		for (int j = i.address; j < i.address + i.size; j++)
+			setIndex(j, i.index);
 		mInstructions << i;
 	}
 };
